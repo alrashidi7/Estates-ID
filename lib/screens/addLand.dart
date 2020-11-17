@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
 
+import 'package:estates_identifier/viewModels/postViewModels.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,31 +12,8 @@ class AddLand extends StatefulWidget {
 }
 
 class _AddLandState extends State<AddLand> {
-  var _renderObjectKey = new GlobalKey();
   Uint8List memoryImage;
   bool memeory = false;
-
-  Future<Uint8List> _getWidgetImage() async {
-    try {
-      RenderRepaintBoundary boundary =
-          _renderObjectKey.currentContext.findRenderObject();
-      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-      var pngBytes = byteData.buffer.asUint8List();
-      var bs64 = base64Encode(pngBytes);
-      print("image: $bs64");
-      debugPrint(bs64.length.toString());
-      setState(() {
-        memoryImage = pngBytes;
-        memeory = true;
-      });
-      return pngBytes;
-    } catch (exception) {
-      print("exp: $exception");
-      return exception;
-    }
-  }
 
   final ownerName = TextEditingController();
   final phoneNumber = TextEditingController();
@@ -48,6 +24,7 @@ class _AddLandState extends State<AddLand> {
   final northSide = TextEditingController();
   final eastSide = TextEditingController();
   final address = TextEditingController();
+  PostViewModel postViewModel;
   GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
   String qrData = "qenerate";
   bool isGenerate = false;
@@ -56,6 +33,13 @@ class _AddLandState extends State<AddLand> {
     globalKey.currentState.showSnackBar(SnackBar(content: Text(message)));
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+     postViewModel = new PostViewModel();
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,8 +161,8 @@ class _AddLandState extends State<AddLand> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
-          _getWidgetImage();
           if (isGenerate == true) {
+          postViewModel.addLand(ownerName.text, phoneNumber.text, address.text, area.text, price.text, westSide.text, northSide.text, eastSide.text,southSide.text);
             showSnackbar("uploading data successfully");
           } else {
             showSnackbar("please generate QR_Code ");

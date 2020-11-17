@@ -1,4 +1,5 @@
 import 'package:estates_identifier/viewModels/login.dart';
+import 'package:estates_identifier/viewModels/postViewModels.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -16,12 +17,13 @@ class _LoginState extends State<Login> {
   bool isloading = false;
   bool isSuccess = false;
   LoginViewModel viewModel;
+  PostViewModel postViewModel ;
 
   @override
   void initState() {
     // TODO: implement initState
      viewModel = new LoginViewModel();
-
+     postViewModel = new PostViewModel();
     super.initState();
   }
   @override
@@ -78,6 +80,7 @@ class _LoginState extends State<Login> {
                   TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.text,
+                    obscureText: true,
                     decoration: InputDecoration(
                       labelStyle: TextStyle(color:Theme.of(context).primaryColor ),
                       focusColor: Theme.of(context).backgroundColor,
@@ -92,23 +95,6 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: rememberMe,
-                        activeColor: Theme.of(context).primaryColor, onChanged: ((bool value) {
-                        setState(() {
-                          rememberMe = value;
-                        });
-                      }),
-                      ),
-                      Text(
-                        'Remember ME',
-                        style: TextStyle(),
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.start,
-                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -119,7 +105,22 @@ class _LoginState extends State<Login> {
                         setState(() {
                           isloading = true;
                         });
-                        viewModel.goHome(context);
+                        // ignore: unrelated_type_equality_checks
+                        postViewModel.login(phoneController.text, passwordController.text).then((List result){
+                          print("result:${result[0]}");
+                          setState(() {
+                            isloading = false;
+                          });
+                          if(result[0] == "success"){
+
+                            viewModel.goHome(context,result[1],result[2]);
+                          }else{
+
+                          }
+                        });
+
+
+
                      //   sendData();
                       },
                       elevation: 10,
@@ -139,6 +140,23 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(
                     height: 30,
+                  ),
+                  Row(
+                    children: [
+                      Text('You don`t have Account?! ',
+                          style: TextStyle(color: Colors.black87)),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pushNamed('/register');
+                          },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor, fontSize: 18),
+                        ),
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
                   ),
                 ],
 

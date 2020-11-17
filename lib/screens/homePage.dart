@@ -1,9 +1,17 @@
+import 'package:estates_identifier/widgets/DepartmentWidget.dart';
 import 'package:estates_identifier/widgets/homeWidget.dart';
+import 'package:estates_identifier/widgets/houseWidget.dart';
 import 'package:estates_identifier/widgets/landsWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  final String userName;
+  final String phoneNumber;
+
+
+  HomePage(this.userName, this.phoneNumber);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -15,14 +23,8 @@ class _HomePageState extends State<HomePage> {
     List<Widget> _widgetOptions = <Widget>[
    HomeWidget(),
     LandsWidget(),
-    Text(
-      'Index 2: Homes List',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Departments List',
-      style: optionStyle,
-    ),
+    HouseWidget(),
+    DepartmentWidget(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,6 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final HomePage args = ModalRoute.of(context).settings.arguments;
+    print(args.phoneNumber);
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -41,8 +45,8 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
            new UserAccountsDrawerHeader(
-             accountName: Text("Alrashidi"),
-             accountEmail: Text("01094034584"),
+             accountName: Text("${args.userName}"),
+             accountEmail: Text("${args.phoneNumber}"),
            ),
             ListTile(
               title: Text('Add Land'),

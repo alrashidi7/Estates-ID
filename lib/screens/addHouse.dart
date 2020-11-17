@@ -1,3 +1,5 @@
+import 'package:estates_identifier/viewModels/getViewModels.dart';
+import 'package:estates_identifier/viewModels/postViewModels.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -19,11 +21,19 @@ class _AddHouseState extends State<AddHouse> {
   final northSide = TextEditingController();
   final eastSide = TextEditingController();
   final address = TextEditingController();
+  PostViewModel postViewModel;
   GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
   String qrData ="qenerate";
   bool isGenerate = false;
   showSnackbar(String message){
     globalKey.currentState.showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    postViewModel = new PostViewModel();
+    super.initState();
   }
 
   @override
@@ -142,6 +152,7 @@ class _AddHouseState extends State<AddHouse> {
         onPressed: () {
           // Add your onPressed code here!
           if(isGenerate == true){
+            postViewModel.addHouse(ownerName.text, phoneNumber.text, numRooms.text, address.text, area.text, price.text, westSide.text, northSide.text, eastSide.text, southSide.text);
             showSnackbar("uploading data successfully");
           }else{
             showSnackbar("please generate QR_Code ");
