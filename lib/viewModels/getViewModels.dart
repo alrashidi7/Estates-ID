@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class GetViewModels {
   Future<List<HouseModel>> getAllHouses() async {
-    var url = "http://192.168.1.9/project-1/getAllHouses.php";
+    var url = "https://projectalifaisal.000webhostapp.com/back-end/getAllHouses.php";
     List<HouseModel> houseList = new List<HouseModel>();
     var response = await http.get(url); //
 
@@ -30,7 +30,7 @@ class GetViewModels {
 
 
   Future<List<DepartmentModel>> getAllDepartments() async {
-    var url = "http://192.168.1.9/project-1/getAllDepartment.php";
+    var url = "https://projectalifaisal.000webhostapp.com/back-end/getAllDepartment.php";
     var response = await http.get(url);
     List<DepartmentModel> departmentList = new List<DepartmentModel>();
     if(response.statusCode == 200){
@@ -54,7 +54,7 @@ class GetViewModels {
   }
 
   Future<List<LandModel>> getAllLands() async {
-    var url = "http://192.168.1.9/project-1/getAllLands.php";
+    var url = "https://projectalifaisal.000webhostapp.com/back-end/getAllLands.php";
     var response = await http.get(url);
     List<LandModel> landList = new List<LandModel>();
     if (response.statusCode == 200) {

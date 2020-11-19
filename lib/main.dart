@@ -5,6 +5,9 @@ import 'package:estates_identifier/screens/homePage.dart';
 import 'package:estates_identifier/screens/login.dart';
 import 'package:estates_identifier/screens/mainPage.dart';
 import 'package:estates_identifier/screens/register.dart';
+import 'package:estates_identifier/screens/updateDepartment.dart';
+import 'package:estates_identifier/screens/updateHouse.dart';
+import 'package:estates_identifier/screens/updateLand.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,8 +28,11 @@ class MyApp extends StatelessWidget {
         "/home":(context)=> new HomePage("",""),
         "/addLand":(context)=> new AddLand(),
         "/addHouse":(context)=> new AddHouse(),
-        "/addDepartment":(context)=> new AddDepartment(),
         "/register":(context)=> new Register(),
+        "/addDepartment":(context)=> new AddDepartment(),
+        "/updateLand":(context)=> new UpdateLand(""),
+        "/updateHouse":(context)=> new UpdateHouse(""),
+        "/updateDepartment":(context)=> new UpdateDepartment(""),
       },
     );
   }

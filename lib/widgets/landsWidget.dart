@@ -1,4 +1,5 @@
 import 'package:estates_identifier/models/landModel.dart';
+import 'package:estates_identifier/screens/updateLand.dart';
 import 'package:estates_identifier/viewModels/getViewModels.dart';
 import 'package:estates_identifier/viewModels/postViewModels.dart';
 import 'package:flutter/material.dart';
@@ -102,10 +103,10 @@ class _LandsWidgetState extends State<LandsWidget> {
   deleteItemAlertDialog(BuildContext context,String id) {
     // set up the buttons
     Widget cancelButton = FlatButton(
-      child: Text("Cancel"),
-      onPressed:  () {
-        Navigator.pop(context);
-      },
+        child: Text("Update"),
+        onPressed:  () {
+          Navigator.of(context).pushNamed( '/updateLand',arguments: UpdateLand(id));
+        }
     );
     Widget continueButton = FlatButton(
       child: Text("Delete",style: TextStyle(color: Colors.red),),
@@ -118,8 +119,8 @@ class _LandsWidgetState extends State<LandsWidget> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Delete this Item"),
-      content: Text("Would you like to delete this item?!"),
+      title: Text("Delete/Update this Item"),
+      content: Text("Would you like to delete or update this item?!"),
       actions: [
         cancelButton,
         continueButton,
