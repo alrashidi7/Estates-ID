@@ -30,7 +30,7 @@ class GetViewModels {
 
 
   Future<List<DepartmentModel>> getAllDepartments() async {
-    var url = "https://projectalifaisal.000webhostapp.com/back-end/getAllDepartment.php";
+    var url = "https://projectalifaisal.000webhostapp.com/back-end/getAllDepartments.php";
     var response = await http.get(url);
     List<DepartmentModel> departmentList = new List<DepartmentModel>();
     if(response.statusCode == 200){

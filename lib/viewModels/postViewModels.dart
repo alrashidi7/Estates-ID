@@ -79,7 +79,7 @@ class PostViewModel{
   }
   Future<String> addHouse(String ownerName,String phoneNumber,String numOfRooms,String address,String area,String price,
       String westSide,String northSide,String eastSide,String southSide) async{
-    var url = "https://projectalifaisal.000webhostapp.com/back-end/ddHouse.php";
+    var url = "https://projectalifaisal.000webhostapp.com/back-end/addHouse.php";
     var response = await http.post(url,body: {
       "ownerName":ownerName,
       "phoneNumber":phoneNumber,

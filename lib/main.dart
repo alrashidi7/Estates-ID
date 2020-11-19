@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Estates ID',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(156, 216, 226, 1),
