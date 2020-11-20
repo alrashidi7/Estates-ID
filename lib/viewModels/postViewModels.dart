@@ -141,6 +141,7 @@ class PostViewModel{
   }
   Future<List<String>> login(String phoneNumber,String password)async{
     var url = "https://projectalifaisal.000webhostapp.com/back-end/login.php";
+    print('$phoneNumber::::$password');
     var response = await http.post(url,body: {
       "phoneNumber":phoneNumber,
       "password":password,
